@@ -1,0 +1,1 @@
+document.GetElementById("Ciao").innerHTML = "ciao a tutti";
