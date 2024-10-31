@@ -18,13 +18,19 @@
             <button id="bottone" type="button" class="btn btn-primary" onclick="mostra()">Mostra</button>
         </div></div>
         <div class="row mt-5">
-        
         <div class="row mt-6"> 
         <div class="card d-none" id="cardNascosta" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">Calcolo Intensità</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              
+              <label for="tensione">tensione (V):</label>
+              <input type="number" class="form-control" id="tensioneA" placeholder="V" required>
+
+              <label for="intensita">Intensità (Ohm):</label>
+              <input type="number" class="form-control" id="resistenzaA" placeholder="Ohm" required>
+
+              <a class="btn btn-primary btn-block mt-3" onclick="calcolaIntensita()">Calcola La Intensità</a>
+              <h2 class="mt-5" id="risultatoA"></h2>
             </div>
         </div>
     </div>
@@ -41,8 +47,15 @@
         <div class="card d-none" id="cardNascosta1" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">Calcolo Tensione</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <label for="resistenza">Resistenza (ohm):</label>
+
+              <input type="number" class="form-control" id="resistenzaB" placeholder="Ohm" required>
+
+              <label for="intensita">Intensità (A):</label>
+              <input type="number" class="form-control" id="intensitaB" placeholder="A" required>
+
+              <a class="btn btn-primary btn-block mt-3" onclick="calcolaTensione()">Calcola La Tensione</a>
+              <h2 class="mt-5" id="risultatoB"></h2>
             </div>
         </div>
     </div>
@@ -59,8 +72,15 @@
         <div class="card d-none" id="cardNascosta2" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">Calcolo Resistenza</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+
+              <label for="resistenza">Tensione (V):</label>
+              <input type="number" class="form-control" id="tensioneC" placeholder="V" required>
+
+              <label for="intensita">Intensità (A):</label>
+              <input type="number" class="form-control" id="intensitaC" placeholder="A" required>
+
+              <a class="btn btn-primary btn-block mt-3" onclick="calcolaResistenza()">Calcola La Resistenza</a>
+              <h2 class="mt-5" id="risultatoC"></h2>
             </div>
         </div>
     </div>
