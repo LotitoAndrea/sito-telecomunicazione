@@ -46,6 +46,22 @@ function mostra2()
     }
 }
 
+function mostra3()
+{
+    let card = document.getElementById("cardNascosta3");
+    let bottone2 = document.getElementById("bottone3");
+    if(card.classList.contains("d-none"))
+    {
+        card.classList.remove("d-none");
+        bottone2.innerHTML = "Nascondi";
+    }
+    else
+    {
+        card.classList.add("d-none");
+        bottone2.innerHTML = "Mostra Calcolatore Kirchhoff";
+    }
+}
+
 function calcolaTensione()
 {
     const resistenza = parseFloat(document.getElementById("resistenzaB").value);
@@ -89,4 +105,46 @@ function calcolaResistenza()
             alert("Inserisci dei valori validi.");
             return;
         }
+}
+
+function generaResistenze() 
+{
+    let numResistenze = document.getElementById('numeroResistenze').value;
+    let container = document.getElementById('resistenzeForm');
+    container.innerHTML = "";
+    for (let i = 1; i <= numResistenze; i++) 
+    {
+        let div = document.createElement('div');
+        div.classList.add('mb-3');
+        div.innerHTML = `
+            <label for="resistenza${i}" class="form-label">Resistenza ${i} (R${i}):</label>
+            <input type="number" class="form-control" id="resistenza${i}" placeholder="Inserisci la resistenza R${i}" required>
+        `;
+        container.appendChild(div);
+    }
+}
+
+function calcolaKirchhoff() 
+{
+    let numResistenze = document.getElementById('numeroResistenze').value;
+    let resistenze = [];
+    let configurazione = document.getElementById('configurazione').value;
+    for (let i = 1; i <= numResistenze; i++) 
+    {
+        let R = parseFloat(document.getElementById(`resistenza${i}`).value);
+        if (!isNaN(R)) {
+            resistenze.push(R);
+        }
+    }
+    let risultato;
+    if (configurazione === 'serie') 
+    {
+        risultato = resistenze.reduce((acc, R) => acc + R, 0);
+        document.getElementById('risultatoD').innerHTML = "La resistenza equivalente in serie è: " + risultato + " Ohm";
+    } else if (configurazione === 'parallelo') 
+    {
+        let invResistenze = resistenze.reduce((acc, R) => acc + (1 / R), 0);
+        risultato = 1 / invResistenze;
+        document.getElementById('risultatoD').innerHTML = "La resistenza equivalente in parallelo è: " + risultato.toFixed(2) + " Ohm";
+    }
 }
