@@ -10,7 +10,7 @@ function mostra()
     else
     {
         card.classList.add("d-none");
-        bottone.innerHTML = "Mostra";
+        bottone.innerHTML = "Mostra Calcolatore Intensità";
     }
 }
 
@@ -26,7 +26,7 @@ function mostra1()
     else
     {
         card.classList.add("d-none");
-        bottone1.innerHTML = "Mostra";
+        bottone1.innerHTML = "Mostra Calcolatore Tensione";
     }
 }
 
@@ -42,7 +42,7 @@ function mostra2()
     else
     {
         card.classList.add("d-none");
-        bottone2.innerHTML = "Mostra";
+        bottone2.innerHTML = "Mostra Calcolatore Resistenza";
     }
 }
 
