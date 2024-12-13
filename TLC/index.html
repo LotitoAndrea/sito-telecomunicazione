@@ -108,11 +108,44 @@
                                     <option value="parallelo">Parallelo</option>
                                 </select>
                             </div>
+                            <div class="mb-3">
+                                <label for="tensioneD" class="form-label">Tensione (V):</label>
+                                <input type="number" class="form-control" id="tensioneD" placeholder="Inserisci la tensione (V)" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="intensitaD" class="form-label">Intensità (A):</label>
+                                <input type="number" class="form-control" id="intensitaD" placeholder="Inserisci l'intensità (A)" required>
+                            </div>
                             <button type="button" class="btn btn-primary" onclick="calcolaKirchhoff()">Calcola Resistenze</button>
                         </form>
                         <h2 class="mt-4" id="risultatoD"></h2>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8">
+                <h2>Teoria delle Leggi Elettriche</h2>
+                <h3>Legge di Ohm</h3>
+                <p>La legge di Ohm afferma che la corrente che attraversa un conduttore tra due punti è direttamente proporzionale alla tensione ai capi del conduttore stesso. La formula è:</p>
+                <p><strong>V = I * R</strong></p>
+                <p>dove V è la tensione, I è la corrente e R è la resistenza.</p>
+                
+                <h2>Teoria delle Leggi di Kirchhoff</h2>
+                <p>Le leggi di Kirchhoff sono due equazioni che descrivono la conservazione della carica e dell'energia nei circuiti elettrici:</p>
+                <ul>
+                    <li><strong>Prima legge di Kirchhoff (Legge dei nodi):</strong> La somma delle correnti entranti in un nodo è uguale alla somma delle correnti uscenti.</li>
+                    <li><strong>Seconda legge di Kirchhoff (Legge delle maglie):</strong> La somma delle tensioni in un circuito chiuso è uguale alla somma delle cadute di tensione.</li>
+                </ul>
+                <h3>Esempio Pratico</h3>
+                <p>Consideriamo un circuito con tre resistenze in serie e una tensione applicata. Le equazioni di Kirchhoff per questo circuito sono:</p>
+                <ul>
+                    <li><strong>Legge dei nodi:</strong> I1 = I2 = I3</li>
+                    <li><strong>Legge delle maglie:</strong> V = V1 + V2 + V3</li>
+                </ul>
             </div>
         </div>
     </div>
