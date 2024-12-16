@@ -109,10 +109,6 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="tensioneD" class="form-label">Tensione (V):</label>
-                                <input type="number" class="form-control" id="tensioneD" placeholder="Inserisci la tensione (V)" required>
-                            </div>
-                            <div class="mb-3">
                                 <label for="intensitaD" class="form-label">Intensità (A):</label>
                                 <input type="number" class="form-control" id="intensitaD" placeholder="Inserisci l'intensità (A)" required>
                             </div>
@@ -141,11 +137,18 @@
                     <li><strong>Seconda legge di Kirchhoff (Legge delle maglie):</strong> La somma delle tensioni in un circuito chiuso è uguale alla somma delle cadute di tensione.</li>
                 </ul>
                 <h3>Esempio Pratico</h3>
-                <p>Consideriamo un circuito con tre resistenze in serie e una tensione applicata. Le equazioni di Kirchhoff per questo circuito sono:</p>
+                <p>Consideriamo un circuito con tre resistenze in parallelo e una corrente applicata. Le equazioni di Kirchhoff per questo circuito sono:</p>
                 <ul>
-                    <li><strong>Legge dei nodi:</strong> I1 = I2 = I3</li>
-                    <li><strong>Legge delle maglie:</strong> V = V1 + V2 + V3</li>
+                    <li><strong>Legge dei nodi:</strong> I = I1 + I2 + I3</li>
+                    <li><strong>Legge delle maglie:</strong> V = V1 = V2 = V3</li>
                 </ul>
+                <p>Per calcolare le correnti attraverso ogni resistenza in un circuito in parallelo, possiamo usare la legge di Ohm per ogni resistenza:</p>
+                <p><strong>I<sub>i</sub> = V / R<sub>i</sub></strong></p>
+                <p>dove I<sub>i</sub> è la corrente attraverso la resistenza R<sub>i</sub>, V è la tensione totale applicata al circuito e R<sub>i</sub> è la resistenza.</p>
+                <p>La resistenza equivalente del circuito in parallelo è data da:</p>
+                <p><strong>1 / R<sub>eq</sub> = 1 / R<sub>1</sub> + 1 / R<sub>2</sub> + 1 / R<sub>3</sub></strong></p>
+                <p>La tensione totale può essere calcolata come:</p>
+                <p><strong>V = I<sub>tot</sub> * R<sub>eq</sub></strong></p>
             </div>
         </div>
     </div>

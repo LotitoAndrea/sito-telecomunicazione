@@ -128,6 +128,10 @@ function calcolaTensioniSerie(resistenze, intensita) {
     return resistenze.map(R => R * intensita);
 }
 
+function calcolaTensioniParallelo(resistenze, intensita) {
+    return resistenze.map(R => intensita / R);
+}
+
 function calcolaKirchhoff() 
 {
     let numResistenze = document.getElementById('numeroResistenze').value;
@@ -140,7 +144,6 @@ function calcolaKirchhoff()
             resistenze.push(R);
         }
     }
-    let tensione = parseFloat(document.getElementById('tensioneD').value);
     let intensita = parseFloat(document.getElementById('intensitaD').value);
     let risultato;
     if (configurazione === 'serie') 
@@ -156,9 +159,9 @@ function calcolaKirchhoff()
         let invResistenze = resistenze.reduce((acc, R) => acc + (1 / R), 0);
         risultato = 1 / invResistenze;
         document.getElementById('risultatoD').innerHTML = "La resistenza equivalente in parallelo è: " + risultato.toFixed(2) + " Ohm";
-    }
-    if (!isNaN(tensione) && !isNaN(intensita)) {
-        let potenza = tensione * intensita;
-        document.getElementById('risultatoD').innerHTML += "<br>La potenza è: " + potenza + " W";
+        if (!isNaN(intensita)) {
+            let tensioni = calcolaTensioniParallelo(resistenze, intensita);
+            document.getElementById('risultatoD').innerHTML += "<br>Le tensioni ai capi delle resistenze sono: " + tensioni.join(", ") + " V";
+        }
     }
 }
