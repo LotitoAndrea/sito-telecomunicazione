@@ -125,11 +125,11 @@ function generaResistenze()
 }
 
 function calcolaTensioniSerie(resistenze, intensita) {
-    return resistenze.map(R => R * intensita);
+    return resistenze.map(R => (R * intensita).toFixed(2));
 }
 
 function calcolaTensioniParallelo(resistenze, intensita) {
-    return resistenze.map(R => intensita / R);
+    return resistenze.map(R => (intensita / R).toFixed(2));
 }
 
 function calcolaKirchhoff() 
@@ -148,20 +148,20 @@ function calcolaKirchhoff()
     let risultato;
     if (configurazione === 'serie') 
     {
-        risultato = resistenze.reduce((acc, R) => acc + R, 0);
+        risultato = resistenze.reduce((acc, R) => acc + R, 0).toFixed(2);
         document.getElementById('risultatoD').innerHTML = "La resistenza equivalente in serie è: " + risultato + " Ohm";
         if (!isNaN(intensita)) {
             let tensioni = calcolaTensioniSerie(resistenze, intensita);
-            document.getElementById('risultatoD').innerHTML += "<br>Le tensioni ai capi delle resistenze sono: " + tensioni.join(", ") + " V";
+            document.getElementById('risultatoD').innerHTML += "<br>Le tensioni ai capi delle resistenze sono: " + tensioni.join(" V , ") + " V";
         }
     } else if (configurazione === 'parallelo') 
     {
         let invResistenze = resistenze.reduce((acc, R) => acc + (1 / R), 0);
-        risultato = 1 / invResistenze;
-        document.getElementById('risultatoD').innerHTML = "La resistenza equivalente in parallelo è: " + risultato.toFixed(2) + " Ohm";
+        risultato = (1 / invResistenze).toFixed(2);
+        document.getElementById('risultatoD').innerHTML = "La resistenza equivalente in parallelo è: " + risultato + " Ohm";
         if (!isNaN(intensita)) {
             let tensioni = calcolaTensioniParallelo(resistenze, intensita);
-            document.getElementById('risultatoD').innerHTML += "<br>Le tensioni ai capi delle resistenze sono: " + tensioni.join(", ") + " V";
+            document.getElementById('risultatoD').innerHTML += "<br>Le tensioni ai capi delle resistenze sono: " + tensioni.join(" V , ") + " V";
         }
     }
 }
