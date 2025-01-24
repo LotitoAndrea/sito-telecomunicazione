@@ -115,8 +115,10 @@
                             <button type="button" class="btn btn-primary" onclick="calcolaKirchhoff()">Calcola Resistenze</button>
                         </form>
                         <h2 class="mt-4" id="risultatoD"></h2>
-                        <img src="immagine TLC.jpeg" class="img-fluid mt-4" alt="Serie e Parallelo">
-                        <p><i> esempio di calcolo... </i></p>
+                        <div class="row">
+                            <img src="immagine TLC.jpeg" class="img-fluid mt-4 mb-3" alt="Serie e Parallelo">
+                            <p><i> esempio di calcolo... </i></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -125,7 +127,50 @@
 
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-6">
+                <button id="bottone4" type="button" class="btn btn-primary btn-lg w-100" onclick="mostra4()">Mostra Calcolatore Sovrapposizione degli Effetti</button>
+                <div class="card d-none mt-4" id="cardNascosta4" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Calcolo Sovrapposizione degli Effetti</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="resistenza1" class="form-label">Resistenza R1 (Ohm):</label>
+                                <input type="number" class="form-control" id="resistenza1" placeholder="Inserisci la resistenza R1 (Ohm)" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="resistenza2" class="form-label">Resistenza R2 (Ohm):</label>
+                                <input type="number" class="form-control" id="resistenza2" placeholder="Inserisci la resistenza R2 (Ohm)" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="resistenza3" class="form-label">Resistenza R3 (Ohm):</label>
+                                <input type="number" class="form-control" id="resistenza3" placeholder="Inserisci la resistenza R3 (Ohm)" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tensioneE1" class="form-label">Tensione E1 (V):</label>
+                                <input type="number" class="form-control" id="tensioneE1" placeholder="Inserisci la tensione E1 (V)" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tensioneE2" class="form-label">Tensione E2 (V):</label>
+                                <input type="number" class="form-control" id="tensioneE2" placeholder="Inserisci la tensione E2 (V)" required>
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="calcolaSovrapposizione()">Calcola Sovrapposizione</button>
+                        </form>
+                        <h2 class="mt-4" id="risultatoE"></h2>
+                        <div class="row">
+                            <img src="SITO TLC image 2.png" class="img-fluid mt-4" alt="Sovrapposizione degli Effetti">
+                            <img src="SITO TLC image 2 VER blu.png" class="img-fluid mt-4" alt="Sovrapposizione degli Effetti">
+                            <img src="SITO TLC image 2 VER rossa.png" class="img-fluid mt-4" alt="Sovrapposizione degli Effetti">
+                            <p><i> esempio di calcolo... </i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 mb-5">
                 <h2>Teoria delle Leggi Elettriche</h2>
                 <h3>Legge di Ohm</h3>
                 <p>La legge di Ohm afferma che la corrente che attraversa un conduttore tra due punti è direttamente proporzionale alla tensione ai capi del conduttore stesso. La formula è:</p>
@@ -151,10 +196,24 @@
                 <p><strong>1 / R<sub>eq</sub> = 1 / R<sub>1</sub> + 1 / R<sub>2</sub> + 1 / R<sub>3</sub></strong></p>
                 <p>La tensione totale può essere calcolata come:</p>
                 <p><strong>V = I<sub>tot</sub> * R<sub>eq</sub></strong></p>
+                
+                <h2>Principio di Sovrapposizione degli Effetti</h2>
+                <p>Il principio di sovrapposizione degli effetti afferma che in un circuito lineare con più sorgenti indipendenti, la risposta (tensione o corrente) in un elemento del circuito è la somma algebrica delle risposte causate da ciascuna sorgente indipendente considerata separatamente, mentre tutte le altre sorgenti indipendenti sono disattivate (sostituite da cortocircuiti se sono sorgenti di tensione o da circuiti aperti se sono sorgenti di corrente).</p>
+                <h3>Esempio Pratico</h3>
+                <p>Consideriamo un circuito con tre resistenze R1, R2, R3 e due sorgenti di tensione E1 e E2. Vogliamo calcolare la tensione ai capi di R2 utilizzando il principio di sovrapposizione.</p>
+                <p><strong>Passi:</strong></p>
+                <ol>
+                    <li><strong>Contributo di E1 (spegnendo E2):</strong> Disattivare E2 (sostituirlo con un cortocircuito). Calcolare la corrente e la tensione nel circuito con solo E1 attivo.</li>
+                    <li><strong>Contributo di E2 (spegnendo E1):</strong> Disattivare E1 (sostituirlo con un cortocircuito). Calcolare la corrente e la tensione nel circuito con solo E2 attivo.</li>
+                    <li><strong>Somma delle risposte:</strong> Sommare algebricamente le risposte ottenute per ottenere la risposta totale.</li>
+                </ol>
             </div>
         </div>
     </div>
-    
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2025 Sito di TLC di Lotito</p>
+    </footer>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
