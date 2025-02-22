@@ -177,6 +177,28 @@
 
     <div class="container mt-5">
         <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <button id="bottone5" type="button" class="btn btn-primary btn-lg w-100" onclick="mostra5()">Mostra Calcolatore Mappe di Karnaugh</button>
+                <div class="card d-none mt-4" id="cardNascosta5" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Calcolo delle Mappe di Karnaugh</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="numVariabili" class="form-label">Numero di Variabili:</label>
+                                <input type="number" class="form-control" id="numVariabili" min="2" max="4" placeholder="Inserisci il numero di variabili" required onchange="generaTabella()">
+                            </div>
+                            <div id="karnaughTable" class="mb-3"></div>
+                            <button type="button" class="btn btn-primary" onclick="calcolaMappaKarnaugh()">Calcola Mappa di Karnaugh</button>
+                        </form>
+                        <h2 class="mt-4" id="risultatoKarnaugh"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
             <div class="col-12 col-md-8">
                 <h2>Teoria delle Leggi Elettriche</h2>
                 <h3>Legge di Ohm</h3>
@@ -214,6 +236,15 @@
                     <li><strong>Contributo di E2 (spegnendo E1):</strong> Disattivare E1 (sostituirlo con un cortocircuito). Calcolare la corrente e la tensione nel circuito con solo E2 attivo.</li>
                     <li><strong>Somma delle risposte:</strong> Sommare algebricamente le risposte ottenute per ottenere la risposta totale.</li>
                 </ol>
+                <h2>Cosa sono le Mappe di Karnaugh?</h2>
+                <p>Le <strong>Mappe di Karnaugh</strong> (o <em>K-map</em>) sono tabelle usate per semplificare le funzioni booleane in modo visuale.</p>
+                <p><strong>Come funzionano?</strong></p>
+                <ul>
+                    <li>Si rappresentano le combinazioni delle variabili in una tabella speciale.</li>
+                    <li>Si evidenziano i gruppi di "1" adiacenti (orizzontali o verticali).</li>
+                    <li>Si scrive l’espressione booleana minimizzata.</li>
+                </ul>
+                <p>Questa tecnica riduce l'uso delle porte logiche nei circuiti digitali, rendendo i circuiti più efficienti.</p>        
             </div>
         </div>
     </div>

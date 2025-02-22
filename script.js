@@ -58,6 +58,18 @@ function mostra4() {
     }
 }
 
+function mostra5() {
+    let card = document.getElementById("cardNascosta5");
+    let bottone5 = document.getElementById("bottone5");
+    if (card.classList.contains("d-none")) {
+        card.classList.remove("d-none");
+        bottone5.innerHTML = "Nascondi";
+    } else {
+        card.classList.add("d-none");
+        bottone5.innerHTML = "Mostra Calcolatore Mappe di Karnaugh";
+    }
+}
+
 function calcolaTensione() {
     const resistenza = parseFloat(document.getElementById("resistenzaB").value);
     const intensita = parseFloat(document.getElementById("intensitaB").value);
@@ -183,4 +195,196 @@ function calcolaSovrapposizione() {
     const Vout = V1 + V2; // La polarità dipende dalla direzione della corrente
 
     document.getElementById("risultatoE").innerText = "La tensione ai capi di R2 è: " + Vout.toFixed(2) + " V";
+}
+
+function generaTabella() {
+    const numVariabili = document.getElementById('numVariabili').value;
+    let tableHTML = '';
+
+    if (numVariabili == 2) {
+        tableHTML = `
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th></th>
+                    <th>0</th>
+                    <th>1</th>
+                </tr>
+                <tr>
+                    <th>0</th>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                </tr>
+            </table>
+        `;
+    } else if (numVariabili == 3) {
+        tableHTML = `
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th></th>
+                    <th>00</th>
+                    <th>01</th>
+                    <th>11</th>
+                    <th>10</th>
+                </tr>
+                <tr>
+                    <th>0</th>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                </tr>
+            </table>
+        `;
+    } else if (numVariabili == 4) {
+        tableHTML = `
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th></th>
+                    <th>00</th>
+                    <th>01</th>
+                    <th>11</th>
+                    <th>10</th>
+                </tr>
+                <tr>
+                    <th>00</th>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                </tr>
+                <tr>
+                    <th>01</th>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                </tr>
+                <tr>
+                    <th>11</th>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                </tr>
+                <tr>
+                    <th>10</th>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                </tr>
+            </table>
+        `;
+    }
+
+    document.getElementById('karnaughTable').innerHTML = tableHTML;
+}
+
+function toggleCell(cell) {
+    if (cell.innerHTML == '0') {
+        cell.innerHTML = '1';
+        cell.classList.remove('inactive');
+        cell.classList.add('active');
+    } else {
+        cell.innerHTML = '0';
+        cell.classList.remove('active');
+        cell.classList.add('inactive');
+    }
+}
+
+function calcolaMappaKarnaugh() {
+    const numVariabili = document.getElementById('numVariabili').value;
+    const table = document.querySelector('#karnaughTable table');
+    let valoriMappa = [];
+
+    for (let i = 1; i < table.rows.length; i++) {
+        for (let j = 1; j < table.rows[i].cells.length; j++) {
+            valoriMappa.push(parseInt(table.rows[i].cells[j].innerHTML));
+        }
+    }
+
+    let risultato = '';
+
+    if (numVariabili == 2) {
+        risultato = calcolaEspressioneBooleana2(valoriMappa);
+    } else if (numVariabili == 3) {
+        risultato = calcolaEspressioneBooleana3(valoriMappa);
+    } else if (numVariabili == 4) {
+        risultato = calcolaEspressioneBooleana4(valoriMappa);
+    }
+
+    document.getElementById('risultatoKarnaugh').innerText = risultato;
+}
+
+function calcolaEspressioneBooleana2(valoriMappa) {
+    let espressione = '';
+
+    if (valoriMappa[0] == 1) espressione += "A'B' + ";
+    if (valoriMappa[1] == 1) espressione += "A'B + ";
+    if (valoriMappa[2] == 1) espressione += "AB' + ";
+    if (valoriMappa[3] == 1) espressione += "AB + ";
+
+    // Semplificazione
+    if (valoriMappa[0] == 1 && valoriMappa[1] == 1) espressione = "A' + ";
+    if (valoriMappa[2] == 1 && valoriMappa[3] == 1) espressione = "A + ";
+    if (valoriMappa[0] == 1 && valoriMappa[2] == 1) espressione = "B' + ";
+    if (valoriMappa[1] == 1 && valoriMappa[3] == 1) espressione = "B + ";
+
+    return espressione.slice(0, -3); // Rimuove l'ultimo " + "
+}
+
+function calcolaEspressioneBooleana3(valoriMappa) {
+    let espressione = '';
+
+    if (valoriMappa[0] == 1) espressione += "A'B'C' + ";
+    if (valoriMappa[1] == 1) espressione += "A'B'C + ";
+    if (valoriMappa[2] == 1) espressione += "A'BC + ";
+    if (valoriMappa[3] == 1) espressione += "A'BC' + ";
+    if (valoriMappa[4] == 1) espressione += "AB'C' + ";
+    if (valoriMappa[5] == 1) espressione += "AB'C + ";
+    if (valoriMappa[6] == 1) espressione += "ABC + ";
+    if (valoriMappa[7] == 1) espressione += "ABC' + ";
+
+    // Semplificazione
+    // (Aggiungere logica di semplificazione per 3 variabili)
+
+    return espressione.slice(0, -3); // Rimuove l'ultimo " + "
+}
+
+function calcolaEspressioneBooleana4(valoriMappa) {
+    let espressione = '';
+
+    if (valoriMappa[0] == 1) espressione += "A'B'C'D' + ";
+    if (valoriMappa[1] == 1) espressione += "A'B'C'D + ";
+    if (valoriMappa[2] == 1) espressione += "A'B'CD + ";
+    if (valoriMappa[3] == 1) espressione += "A'B'CD' + ";
+    if (valoriMappa[4] == 1) espressione += "A'BC'D' + ";
+    if (valoriMappa[5] == 1) espressione += "A'BC'D + ";
+    if (valoriMappa[6] == 1) espressione += "A'BCD + ";
+    if (valoriMappa[7] == 1) espressione += "A'BCD' + ";
+    if (valoriMappa[8] == 1) espressione += "AB'C'D' + ";
+    if (valoriMappa[9] == 1) espressione += "AB'C'D + ";
+    if (valoriMappa[10] == 1) espressione += "AB'CD + ";
+    if (valoriMappa[11] == 1) espressione += "AB'CD' + ";
+    if (valoriMappa[12] == 1) espressione += "ABC'D' + ";
+    if (valoriMappa[13] == 1) espressione += "ABC'D + ";
+    if (valoriMappa[14] == 1) espressione += "ABCD + ";
+    if (valoriMappa[15] == 1) espressione += "ABCD' + ";
+
+    // Semplificazione
+    // (Aggiungere logica di semplificazione per 4 variabili)
+
+    return espressione.slice(0, -3); // Rimuove l'ultimo " + "
 }

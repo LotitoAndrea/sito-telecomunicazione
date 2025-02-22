@@ -108,3 +108,59 @@ input.form-control {
 #image {
     width: 100%;
 }
+#cardNascosta5 {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+#cardNascosta5 .card-body {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+#cardNascosta5 .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000000;
+}
+
+#cardNascosta5 .form-label {
+    font-weight: bold;
+    color: #000000;
+}
+
+#cardNascosta5 .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+#cardNascosta5 .btn-primary:hover {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+#karnaughTable {
+    margin-top: 20px;
+}
+
+#risultatoKarnaugh {
+    margin-top: 20px;
+    font-size: 1.25rem;
+    color: #000000;
+}
+
+.karnaugh-cell {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.karnaugh-cell.inactive {
+    background-color: #f8f9fa;
+}
+
+.karnaugh-cell.active {
+    background-color: #ff9900;
+    color: #ffffff;
+}
