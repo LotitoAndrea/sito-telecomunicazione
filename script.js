@@ -70,6 +70,18 @@ function mostra5() {
     }
 }
 
+function mostra6() {
+    let card = document.getElementById("cardNascosta6");
+    let bottone5 = document.getElementById("bottone6");
+    if (card.classList.contains("d-none")) {
+        card.classList.remove("d-none");
+        bottone5.innerHTML = "Nascondi";
+    } else {
+        card.classList.add("d-none");
+        bottone5.innerHTML = "Mostra Calcolatore Carica e Scarica";
+    }
+}
+
 function calcolaTensione() {
     const resistenza = parseFloat(document.getElementById("resistenzaB").value);
     const intensita = parseFloat(document.getElementById("intensitaB").value);
@@ -387,4 +399,169 @@ function calcolaEspressioneBooleana4(valoriMappa) {
     // (Aggiungere logica di semplificazione per 4 variabili)
 
     return espressione.slice(0, -3); // Rimuove l'ultimo " + "
+}
+
+function calcolaSerieParallelo() {
+    const numeroResistenze = parseInt(document.getElementById("numeroResistenze").value);
+    const configurazione = document.getElementById("configurazione").value;
+    let resistenze = [];
+    let risultato = 0;
+
+    for (let i = 1; i <= numeroResistenze; i++) {
+        const valore = parseFloat(document.getElementById(`resistenza${i}`).value);
+        resistenze.push(valore);
+    }
+
+    if (configurazione === "serie") {
+        risultato = resistenze.reduce((acc, res) => acc + res, 0);
+    } else if (configurazione === "parallelo") {
+        risultato = 1 / resistenze.reduce((acc, res) => acc + (1 / res), 0);
+    }
+
+    document.getElementById("risultatoD").innerText = `Resistenza equivalente: ${risultato.toFixed(2)} Ω`;
+}
+
+function calcolaCaricaScarica() {
+    const tensioneMax = parseFloat(document.getElementById("tensioneMax").value);
+    const resistenza = parseFloat(document.getElementById("resistenza").value);
+    const capacita = parseFloat(document.getElementById("capacita").value);
+    const tempo = parseFloat(document.getElementById("tempo").value);
+    const tipo = document.getElementById("tipoCarica").value;
+
+    const tau = resistenza * capacita; // Costante di tempo RC
+    let tensione;
+
+    if (tipo === "carica") {
+        tensione = tensioneMax * (1 - Math.exp(-tempo / tau));
+    } else if (tipo === "scarica") {
+        tensione = tensioneMax * Math.exp(-tempo / tau);
+    }
+
+    document.getElementById("risultatoCarica").innerText = `Tensione al tempo t: ${tensione.toFixed(2)} V`;
+}
+
+function calcolaComponente() {
+    const tipo = document.getElementById("tipoComponente").value;
+    const configurazione = document.getElementById("configurazioneComponente").value;
+    const valore1 = parseFloat(document.getElementById("valore1").value);
+    const valore2 = parseFloat(document.getElementById("valore2").value);
+
+    if (isNaN(valore1) || isNaN(valore2)) {
+        alert("Inserisci dei valori validi.");
+        return;
+    }
+
+    let risultato;
+
+    if (tipo === "condensatore") {
+        if (configurazione === "serie") {
+            risultato = 1 / ((1 / valore1) + (1 / valore2));
+        } else if (configurazione === "parallelo") {
+            risultato = valore1 + valore2;
+        }
+    } else if (tipo === "induttore") {
+        if (configurazione === "serie") {
+            risultato = valore1 + valore2;
+        } else if (configurazione === "parallelo") {
+            risultato = 1 / ((1 / valore1) + (1 / valore2));
+        }
+    }
+
+    const unità = tipo === "condensatore" ? "F" : "H";
+    document.getElementById("risultatoComponente").innerText = `Il valore equivalente è: ${risultato.toFixed(2)} ${unità}`;
+}
+
+function mostra7() {
+    let card = document.getElementById("cardNascosta7");
+    let bottone = document.getElementById("bottone7");
+    if (card.classList.contains("d-none")) {
+        card.classList.remove("d-none");
+        bottone.innerHTML = "Nascondi";
+    } else {
+        card.classList.add("d-none");
+        bottone.innerHTML = "Mostra Calcolatore Condensatori e Induttori";
+    }
+}
+
+function mostra8() {
+    let card = document.getElementById("cardNascosta8");
+    let bottone = document.getElementById("bottone8");
+    if (card.classList.contains("d-none")) {
+        card.classList.remove("d-none");
+        bottone.innerHTML = "Nascondi";
+    } else {
+        card.classList.add("d-none");
+        bottone.innerHTML = "Mostra Calcolatore Unificato";
+    }
+}
+
+function aggiornaCampi() {
+    const tipoCalcolo = document.getElementById("tipoCalcolo").value;
+    const campiCaricaScarica = document.getElementById("campiCaricaScarica");
+    const campiSerieParallelo = document.getElementById("campiSerieParallelo");
+
+    if (tipoCalcolo === "caricaScarica") {
+        campiCaricaScarica.classList.remove("d-none");
+        campiSerieParallelo.classList.add("d-none");
+    } else if (tipoCalcolo === "serieParallelo") {
+        campiCaricaScarica.classList.add("d-none");
+        campiSerieParallelo.classList.remove("d-none");
+    }
+}
+
+function calcolaUnificato() {
+    const tipoCalcolo = document.getElementById("tipoCalcolo").value;
+
+    if (tipoCalcolo === "caricaScarica") {
+        const tensioneMax = parseFloat(document.getElementById("tensioneMaxUnificato").value);
+        const resistenza = parseFloat(document.getElementById("resistenzaUnificato").value);
+        const capacita = parseFloat(document.getElementById("capacitaUnificato").value);
+        const tempo = parseFloat(document.getElementById("tempoUnificato").value);
+        const tipo = document.getElementById("tipoCaricaUnificato").value;
+
+        if (isNaN(tensioneMax) || isNaN(resistenza) || isNaN(capacita) || isNaN(tempo)) {
+            alert("Inserisci dei valori validi.");
+            return;
+        }
+
+        const tau = resistenza * capacita; // Costante di tempo RC
+        let tensione;
+
+        if (tipo === "carica") {
+            tensione = tensioneMax * (1 - Math.exp(-tempo / tau));
+        } else if (tipo === "scarica") {
+            tensione = tensioneMax * Math.exp(-tempo / tau);
+        }
+
+        document.getElementById("risultatoUnificato").innerText = `Tensione al tempo t: ${tensione.toFixed(2)} V`;
+    } else if (tipoCalcolo === "serieParallelo") {
+        const tipoComponente = document.getElementById("tipoComponenteUnificato").value;
+        const configurazione = document.getElementById("configurazioneUnificato").value;
+        const valore1 = parseFloat(document.getElementById("valore1Unificato").value);
+        const valore2 = parseFloat(document.getElementById("valore2Unificato").value);
+
+        if (isNaN(valore1) || isNaN(valore2)) {
+            alert("Inserisci dei valori validi.");
+            return;
+        }
+
+        let risultato;
+
+        if (tipoComponente === "condensatore") {
+            if (configurazione === "serie") {
+                risultato = 1 / ((1 / valore1) + (1 / valore2));
+            } else if (configurazione === "parallelo") {
+                risultato = valore1 + valore2;
+            }
+        } else if (tipoComponente === "induttore") {
+            if (configurazione === "serie") {
+                risultato = valore1 + valore2;
+            } else if (configurazione === "parallelo") {
+                risultato = 1 / ((1 / valore1) + (1 / valore2));
+            }
+        }
+
+        const unità = tipoComponente === "condensatore" ? "F" : "H";
+        document.getElementById("risultatoUnificato").innerText = `Il valore equivalente è: ${risultato.toFixed(2)} ${unità}`;
+    }
 }
