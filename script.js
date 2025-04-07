@@ -565,3 +565,20 @@ function calcolaUnificato() {
         document.getElementById("risultatoUnificato").innerText = `Il valore equivalente è: ${risultato.toFixed(2)} ${unità}`;
     }
 }
+
+function mostra9() {
+    let card = document.getElementById("cardNascosta9");
+    let bottone = document.getElementById("bottone9");
+    if (card.classList.contains("d-none")) {
+        card.classList.remove("d-none");
+        bottone.innerHTML = "Nascondi";
+    } else {
+        card.classList.add("d-none");
+        bottone.innerHTML = "Mostra Calcolatore Unificato";
+    }
+}
+
+function calcolaCodificaBinario(nums) {
+    let binario = nums.map(num => num.toString(2).padStart(4, '0')).join(' ');
+    document.getElementById("risultatoCodifica").innerText = `Codifica binaria: ${binario}`;
+}
