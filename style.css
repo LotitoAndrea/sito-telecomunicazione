@@ -164,3 +164,20 @@ input.form-control {
     background-color: #ff9900;
     color: #ffffff;
 }
+
+.alert {
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-success strong {
+    font-weight: bold;
+}

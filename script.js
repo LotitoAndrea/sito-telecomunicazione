@@ -582,3 +582,183 @@ function calcolaCodificaBinario(nums) {
     let binario = nums.map(num => num.toString(2).padStart(4, '0')).join(' ');
     document.getElementById("risultatoCodifica").innerText = `Codifica binaria: ${binario}`;
 }
+
+function calcolaCodificaMappe() {
+    const numVariabili = document.getElementById('numVariabiliMappe').value;
+    const table = document.querySelector('#karnaughTableMappe table');
+    let valoriMappa = [];
+
+    for (let i = 1; i < table.rows.length; i++) {
+        for (let j = 1; j < table.rows[i].cells.length; j++) {
+            valoriMappa.push(parseInt(table.rows[i].cells[j].innerHTML));
+        }
+    }
+
+    let risultato = '';
+
+    if (numVariabili == 2) {
+        risultato = calcolaEspressioneBooleana2(valoriMappa);
+    } else if (numVariabili == 3) {
+        risultato = calcolaEspressioneBooleana3(valoriMappa);
+    } else if (numVariabili == 4) {
+        risultato = calcolaEspressioneBooleana4(valoriMappa);
+    }
+
+    document.getElementById('risultatoCodifica').innerText = `Espressione booleana: ${risultato}`;
+}
+
+function mostra9() {
+    let card = document.getElementById("cardNascosta9");
+    let bottone = document.getElementById("bottone9");
+    if (card.classList.contains("d-none")) {
+        card.classList.remove("d-none");
+        bottone.innerHTML = "Nascondi";
+    } else {
+        card.classList.add("d-none");
+        bottone.innerHTML = "Mostra Calcolatore Codificatori";
+    }
+}
+
+function genera4MappeKarnaugh() {
+    const numVariabili = document.getElementById('numVariabili9').value;
+    let mappeHTML = '';
+
+    for (let i = 1; i <= 4; i++) {
+        let tableHTML = '';
+
+        if (numVariabili == 2) {
+            tableHTML = `
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th></th>
+                        <th>0</th>
+                        <th>1</th>
+                    </tr>
+                    <tr>
+                        <th>0</th>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    </tr>
+                </table>
+            `;
+        } else if (numVariabili == 3) {
+            tableHTML = `
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th></th>
+                        <th>00</th>
+                        <th>01</th>
+                        <th>11</th>
+                        <th>10</th>
+                    </tr>
+                    <tr>
+                        <th>0</th>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    </tr>
+                </table>
+            `;
+        } else if (numVariabili == 4) {
+            tableHTML = `
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th></th>
+                        <th>00</th>
+                        <th>01</th>
+                        <th>11</th>
+                        <th>10</th>
+                    </tr>
+                    <tr>
+                        <th>00</th>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    </tr>
+                    <tr>
+                        <th>01</th>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    </tr>
+                    <tr>
+                        <th>11</th>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    </tr>
+                    <tr>
+                        <th>10</th>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                        <td class="karnaugh-cell inactive" onclick="toggleCell(this)">0</td>
+                    </tr>
+                </table>
+            `;
+        }
+
+        mappeHTML += `
+            <div class="mappa-karnaugh">
+                <h5>Mappa ${i}</h5>
+                ${tableHTML}
+                <button class="btn btn-primary mt-2" onclick="calcolaRisultatoMappa(${i})">Calcola Risultato</button>
+                <div id="risultatoMappa${i}" class="mt-2"></div>
+            </div>
+        `;
+    }
+
+    document.getElementById('mappeKarnaughContainer').innerHTML = mappeHTML;
+}
+
+function calcolaRisultatoMappa(index) {
+    const table = document.querySelector(`#mappeKarnaughContainer .mappa-karnaugh:nth-child(${index}) table`);
+    let valoriMappa = [];
+
+    // Estrai i valori dalla tabella
+    for (let i = 1; i < table.rows.length; i++) {
+        for (let j = 1; j < table.rows[i].cells.length; j++) {
+            valoriMappa.push(parseInt(table.rows[i].cells[j].innerHTML));
+        }
+    }
+
+    const numVariabili = document.getElementById('numVariabili9').value;
+    let risultato = '';
+
+    // Calcola l'espressione booleana in base al numero di variabili
+    if (numVariabili == 2) {
+        risultato = calcolaEspressioneBooleana2(valoriMappa);
+    } else if (numVariabili == 3) {
+        risultato = calcolaEspressioneBooleana3(valoriMappa);
+    } else if (numVariabili == 4) {
+        risultato = calcolaEspressioneBooleana4(valoriMappa);
+    }
+
+    // Codifica il risultato in binario
+    const codificaBinaria = valoriMappa.map(valore => valore.toString(2)).join(' ');
+
+    // Mostra il risultato sotto la tabella con uno stile migliorato
+    const risultatoDiv = document.getElementById(`risultatoMappa${index}`);
+    risultatoDiv.innerHTML = `
+        <div class="alert alert-success mt-3" role="alert">
+            <strong>Risultato:</strong> ${risultato}<br>
+            <strong>Codifica Binaria:</strong> ${codificaBinaria}
+        </div>
+    `;
+}

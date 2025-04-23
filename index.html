@@ -351,6 +351,27 @@
 
     <div class="container mt-5">
         <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <button id="bottone9" type="button" class="btn btn-primary btn-lg w-100" onclick="mostra9()">Mostra Codificatore di Mappe K</button>
+                <div class="card d-none mt-4" id="cardNascosta9" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">Codifica delle Mappe di Karnaugh</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="numVariabili9" class="form-label">Numero di Variabili:</label>
+                                <input type="number" class="form-control" id="numVariabili9" min="2" max="4" placeholder="Inserisci il numero di variabili" required>
+                            </div>
+                            <button type="button" class="btn btn-primary mb-3" onclick="genera4MappeKarnaugh()">Genera 4 Mappe di Karnaugh</button>
+                        </form>
+                        <div id="mappeKarnaughContainer" class="mb-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
             <div class="col-12 col-md-8">
                 <h2>Teoria delle Leggi Elettriche</h2>
                 <h3>Legge di Ohm</h3>
@@ -442,7 +463,22 @@
                     </li>
                 </ol>
                 <p>Risultato: La resistenza equivalente è <strong>30 Ω</strong>.</p>
-            
+                <h2>Come Codificare in Binario?</h2>
+                <p>La codifica binaria è un metodo per rappresentare i numeri o i valori logici utilizzando solo due simboli: <strong>0</strong> e <strong>1</strong>. Questo sistema è alla base dell'informatica e dell'elettronica digitale.</p>
+                <p><strong>Passaggi per la codifica:</strong></p>
+                <ol>
+                    <li><strong>Identificare i valori:</strong> Ogni cella della Mappa di Karnaugh rappresenta un valore logico (0 o 1).</li>
+                    <li><strong>Convertire in binario:</strong> Se i valori sono numerici, possono essere convertiti in binario utilizzando il sistema di numerazione binaria.</li>
+                    <li><strong>Unire i valori:</strong> I valori binari vengono concatenati per formare una stringa binaria rappresentativa.</li>
+                </ol>
+                <p><strong>Esempio:</strong></p>
+                <p>Consideriamo una Mappa di Karnaugh con i seguenti valori:</p>
+                <ul>
+                    <li>Riga 1: 0, 1</li>
+                    <li>Riga 2: 1, 0</li>
+                </ul>
+                <p>La codifica binaria sarà: <strong>0110</strong>.</p>
+                <p>Questa rappresentazione può essere utilizzata per analisi logiche o per implementare circuiti digitali.</p>
             </div>
         </div>
     </div>
